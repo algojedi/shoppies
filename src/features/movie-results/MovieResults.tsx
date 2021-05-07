@@ -1,12 +1,11 @@
 
-import React, { useState } from 'react';
-
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
 import styles from './Movie-Results.module.css';
 import { Movie } from '../movie/movie';
 import { useTypedSelector } from '../../app/store';
 import { selectMovies } from './movieResultsSlice';
+import MovieCard from '../../components/movie-card/MovieCard';
 
 export function MovieResults() {
     const dispatch = useAppDispatch();
@@ -19,7 +18,8 @@ export function MovieResults() {
                 Search Results
             </h3>
             <ul className='movie-list'>
-                {movies.map((movie: Movie) => <li key={movie.imdbID} className='movie'>{movie.Title}</li>)}
+                {movies.map((movie: Movie) => <li key={movie.imdbID}
+                    className='movie'><MovieCard {...movie} /></li>)}
             </ul>
 
         </section>

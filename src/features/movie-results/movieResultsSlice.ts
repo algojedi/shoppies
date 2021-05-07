@@ -22,30 +22,41 @@ type FetchMoviesError = {
 function getUniqueList(arr: Movie[]): Movie[] {
     return [...new Map(arr.map((item) => [item.imdbID, item])).values()]
 }
+export interface UserData {
+    page: number
+    selection: string
+}
 
+const formatSelection = (userInput: string) => {
+    const result = userInput.trim()
+    // replace possible blank spaces in search title
+    return result.replaceAll(' ', '+')
+}
 export const fetchMovies = createAsyncThunk<
     Movie[],
-    string,
+    UserData,
     { rejectValue: FetchMoviesError }
->('movies/fetch', async (selection: string, thunkApi) => {
-    const formattedSelection = selection.replaceAll(' ', '+')
-    const response = await fetch(
-        `http://www.omdbapi.com/?apikey=ca4f8507&type=movie&s=${formattedSelection}`
-    )
-    // Check if status is not okay:
+>('movies/fetch', async (userData: UserData, thunkApi) => {
+    const formattedSelection = formatSelection(userData.selection)
+    let url = `http://www.omdbapi.com/?apikey=ca4f8507&type=movie&s=${formattedSelection}`
+    const pageNum = `&page=${userData.page}`
+    const response = await fetch(url + pageNum)
     if (response.status !== 200) {
-        // TODO: I think i should be checking for response.response
-        // Return the error message:
+        // Return the error message for server error
         console.log('error message when fetching')
         return thunkApi.rejectWithValue({
             message: 'Failed to fetch movies.'
         })
     }
     const data: MovieResultsResponse = await response.json()
-    const movies = data.Search.filter((movie: Movie) => movie.Type == 'movie')
-    const uniqeList = getUniqueList(data.Search) // Search property contains the list of movies
-    console.log({ uniqeList })
-    return uniqeList
+    if (!data.Response) {
+        console.log('bad input.. no matches')
+        // !! TODO: produce error message
+    }
+    // api returns duplicates in some search results
+    const uniqueList = getUniqueList(data.Search) // Search property contains the list of movies
+    console.log({ uniqueList })
+    return uniqueList
 })
 
 export const movieResultsSlice = createSlice({
