@@ -1,0 +1,4 @@
+GET http://www.omdbapi.com/?apikey=ca4f8507&s=rambo&type=movie HTTP/1.1
+Content-Type: application/json
+
+###
