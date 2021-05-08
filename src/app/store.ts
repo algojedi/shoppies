@@ -1,12 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useSelector } from 'react-redux'
-import counterReducer from '../features/counter/counterSlice'
 import nominationsReducer from '../features/nominations/nominationsSlice'
 import moviesReducer from '../features/movie-results/movieResultsSlice'
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer,
         nominations: nominationsReducer,
         movies: moviesReducer
     }

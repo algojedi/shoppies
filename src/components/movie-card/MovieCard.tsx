@@ -1,13 +1,18 @@
 import React from 'react'
 import { Movie } from '../../features/movie/movie'
+import { addNomination } from '../../features/nominations/nominationsSlice'
+import { useDispatch } from 'react-redux';
 
-
-const MovieCard = ({ Title, Year, Poster }: Movie) => {
+// const MovieCard = ({ Title, Year, Poster, imdbID }: Movie) => {
+const MovieCard = (movie: Movie) => {
+    const dispatch = useDispatch()
+    const { Title, Year, Poster, imdbID } = movie
     return (
-        <div>
+        <section>
             {Title}
             {/* <img src={Poster} /> */}
-        </div>
+            <button onClick={() => dispatch(addNomination(movie))}>Nominate </button>
+        </section>
     )
 }
 

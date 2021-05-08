@@ -1,5 +1,4 @@
 import React from 'react';
-import { Counter } from './features/counter/Counter';
 import './App.css';
 import { Nominations } from './features/nominations/Nominations';
 import SearchBar from './components/search-bar/search-bar';

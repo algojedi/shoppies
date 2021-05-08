@@ -6,9 +6,10 @@ import { Movie } from '../movie/movie';
 import { useTypedSelector } from '../../app/store';
 import { selectMovies } from './movieResultsSlice';
 import MovieCard from '../../components/movie-card/MovieCard';
+import { useDispatch } from 'react-redux';
 
 export function MovieResults() {
-    const dispatch = useAppDispatch();
+    // const dispatch = useDispatch()
     const movies: Movie[] = useTypedSelector(selectMovies)
 
     return (

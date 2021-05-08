@@ -6,24 +6,25 @@ export interface NominationsState {
     nominations: Movie[]
 }
 
-const initialState = {
-    nominations: [
-        {
-            Title: 'A Million Ways to Die in the West',
-            Year: '2014',
-            imdbID: 'tt2557490',
-            Type: 'movie',
-            Poster:
-                'https://m.media-amazon.com/images/M/MV5BMTQ0NDcyNjg0MV5BMl5BanBnXkFtZTgwMzk4NTA4MTE@._V1_SX300.jpg'
-        }
-    ]
-} as NominationsState
+const initialState: NominationsState = {
+    nominations: []
+    // {
+    //     Title: 'A Million Ways to Die in the West',
+    //     Year: '2014',
+    //     imdbID: 'tt2557490',
+    //     Type: 'movie',
+    //     Poster:
+    //         'https://m.media-amazon.com/images/M/MV5BMTQ0NDcyNjg0MV5BMl5BanBnXkFtZTgwMzk4NTA4MTE@._V1_SX300.jpg'
+    // }
+    // ]
+}
 
 const addNominationReducer = (
     state: NominationsState,
     action: PayloadAction<Movie>
 ) => {
     const { payload } = action
+    console.log('adding nomination')
     state.nominations.push(payload)
 }
 
@@ -38,7 +39,7 @@ const removeNominationReducer = (
     if (index >= 0) state.nominations.splice(index, 1)
 }
 
-export const nominationsSlice = createSlice({
+const nominationsSlice = createSlice({
     name: 'nominations',
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
@@ -48,7 +49,13 @@ export const nominationsSlice = createSlice({
     }
 })
 
-export const { addNomination, removeNomination } = nominationsSlice.actions
+// export const { addNomination, removeNomination } = nominationsSlice.actions
+export const {
+    // addNomination: addNominationAction,
+    // removeNomination: removeNominationAction
+    addNomination,
+    removeNomination
+} = nominationsSlice.actions
 
 export const selectNoms = (state: RootState) => state.nominations.nominations
 export default nominationsSlice.reducer

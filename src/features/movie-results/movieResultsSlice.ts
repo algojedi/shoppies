@@ -37,10 +37,12 @@ export const fetchMovies = createAsyncThunk<
     UserData,
     { rejectValue: FetchMoviesError }
 >('movies/fetch', async (userData: UserData, thunkApi) => {
+    if (userData.selection == '') return []
     const formattedSelection = formatSelection(userData.selection)
     let url = `http://www.omdbapi.com/?apikey=ca4f8507&type=movie&s=${formattedSelection}`
     const pageNum = `&page=${userData.page}`
     const response = await fetch(url + pageNum)
+    console.log({ url: url + pageNum })
     if (response.status !== 200) {
         // Return the error message for server error
         console.log('error message when fetching')
@@ -49,10 +51,8 @@ export const fetchMovies = createAsyncThunk<
         })
     }
     const data: MovieResultsResponse = await response.json()
-    if (!data.Response) {
-        console.log('bad input.. no matches')
-        // !! TODO: produce error message
-    }
+    console.log({ data })
+    if (data.Response == 'False') return []
     // api returns duplicates in some search results
     const uniqueList = getUniqueList(data.Search) // Search property contains the list of movies
     console.log({ uniqueList })
@@ -71,7 +71,8 @@ export const movieResultsSlice = createSlice({
 
         builder.addCase(fetchMovies.fulfilled, (state, { payload }) => {
             // state.todos.push(...payload)
-            state.movies.push(...payload) // TODO: may cause error b/c of incorrect type
+            // state.movies.push(...payload) // TODO: may cause error b/c of incorrect type
+            state.movies = [...payload]
             state.status = 'idle'
         })
 
@@ -85,5 +86,6 @@ export const movieResultsSlice = createSlice({
 
 // Create and export the selector:
 export const selectMovies = (state: RootState) => state.movies.movies
+export const selectStatus = (state: RootState) => state.movies.status
 
 export default movieResultsSlice.reducer

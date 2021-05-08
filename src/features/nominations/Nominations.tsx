@@ -13,7 +13,7 @@ import { useTypedSelector } from '../../app/store';
 
 export function Nominations() {
     const dispatch = useAppDispatch();
-    const movies: Movie[] = useTypedSelector(selectNoms)
+    const movies = useTypedSelector(selectNoms)
 
     return (
         <section className='nominations'>

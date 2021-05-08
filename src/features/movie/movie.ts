@@ -10,3 +10,8 @@ export interface MovieResultsResponse {
     totalResults: string
     Response: string
 }
+
+// export interface MovieResultError {
+//     Response: boolean
+
+// }
