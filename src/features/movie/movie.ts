@@ -11,3 +11,5 @@ export interface MovieResultsFetchResponse {
     Response: string
     pageNumber: number
 }
+
+export const resultsPerPage = 10

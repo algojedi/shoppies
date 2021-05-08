@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState, AppThunk } from '../../app/store'
-import { MovieResultsFetchResponse, Movie } from '../movie/movie'
+import {
+    MovieResultsFetchResponse,
+    Movie,
+    resultsPerPage
+} from '../movie/movie'
 export interface MovieResultsState {
     status: 'loading' | 'idle'
     error: string | null
@@ -91,8 +95,16 @@ export const movieResultsSlice = createSlice({
         builder.addCase(fetchMovies.fulfilled, (state, { payload }) => {
             // state.movies = [...payload]
             // state.movies = payload.state.status = 'idle'
-            state.movies = [...payload.Search]
+            if (payload.pageNumber > 1) {
+                state.movies = getUniqueList([
+                    ...state.movies,
+                    ...payload.Search
+                ])
+            } else {
+                state.movies = [...payload.Search]
+            }
             state.status = 'idle'
+            state.pageNumber = payload.pageNumber
             state.totalResults = Number.parseInt(payload.totalResults)
         })
 
@@ -109,5 +121,7 @@ export const selectMovies = (state: RootState) => state.movies.movies
 export const selectStatus = (state: RootState) => state.movies.status
 export const selectPageNumber = (state: RootState) => state.movies.pageNumber
 export const selectCount = (state: RootState) => state.movies.totalResults
+export const selectTotalPages = (state: RootState) =>
+    Math.ceil(state.movies.totalResults / resultsPerPage)
 
 export default movieResultsSlice.reducer
