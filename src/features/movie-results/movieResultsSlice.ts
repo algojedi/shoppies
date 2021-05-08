@@ -1,18 +1,20 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState, AppThunk } from '../../app/store'
-import { Movie, MovieResultsResponse } from '../movie/movie'
-import nominationsSlice from '../nominations/nominationsSlice'
-
+import { MovieResultsFetchResponse, Movie } from '../movie/movie'
 export interface MovieResultsState {
     status: 'loading' | 'idle'
     error: string | null
     movies: Movie[]
+    totalResults: number
+    pageNumber: number
 }
 
 const initialState: MovieResultsState = {
     status: 'idle',
     error: null,
-    movies: []
+    movies: [],
+    totalResults: 0,
+    pageNumber: 0
 }
 
 // This type describes the error object structure:
@@ -27,36 +29,53 @@ export interface UserData {
     selection: string
 }
 
+const emptyResponse: MovieResultsFetchResponse = {
+    Search: [],
+    totalResults: '0',
+    Response: 'False',
+    pageNumber: 0
+}
+
 const formatSelection = (userInput: string) => {
     const result = userInput.trim()
     // replace possible blank spaces in search title
     return result.replaceAll(' ', '+')
 }
 export const fetchMovies = createAsyncThunk<
-    Movie[],
+    MovieResultsFetchResponse,
     UserData,
     { rejectValue: FetchMoviesError }
->('movies/fetch', async (userData: UserData, thunkApi) => {
-    if (userData.selection == '') return []
+>('movies/fetch', async (userData, thunkApi) => {
+    // >
+    // 'movies/fetch',
+    // async (userData: UserData) => {
+    if (userData.selection == '') return emptyResponse
     const formattedSelection = formatSelection(userData.selection)
     let url = `http://www.omdbapi.com/?apikey=ca4f8507&type=movie&s=${formattedSelection}`
-    const pageNum = `&page=${userData.page}`
-    const response = await fetch(url + pageNum)
-    console.log({ url: url + pageNum })
+    const pageNumUrl = `&page=${userData.page}`
+    const response = await fetch(url + pageNumUrl)
+    // console.log({ url: url + pageNumUrl })
     if (response.status !== 200) {
         // Return the error message for server error
         console.log('error message when fetching')
         return thunkApi.rejectWithValue({
             message: 'Failed to fetch movies.'
-        })
+        }) // as FetchMoviesError
     }
-    const data: MovieResultsResponse = await response.json()
+    const data: MovieResultsFetchResponse = await response.json()
     console.log({ data })
-    if (data.Response == 'False') return []
+    const { Response, totalResults, Search } = data
+    if (Response == 'False') return emptyResponse
+
     // api returns duplicates in some search results
-    const uniqueList = getUniqueList(data.Search) // Search property contains the list of movies
-    console.log({ uniqueList })
-    return uniqueList
+    const uniqueList = getUniqueList(Search) // Search property contains the list of movies
+    // const count = Number.parseInt(totalResults)
+    return {
+        Search: uniqueList,
+        Response,
+        totalResults,
+        pageNumber: userData.page
+    } as MovieResultsFetchResponse
 })
 
 export const movieResultsSlice = createSlice({
@@ -70,14 +89,15 @@ export const movieResultsSlice = createSlice({
         })
 
         builder.addCase(fetchMovies.fulfilled, (state, { payload }) => {
-            // state.todos.push(...payload)
-            // state.movies.push(...payload) // TODO: may cause error b/c of incorrect type
-            state.movies = [...payload]
+            // state.movies = [...payload]
+            // state.movies = payload.state.status = 'idle'
+            state.movies = [...payload.Search]
             state.status = 'idle'
+            state.totalResults = Number.parseInt(payload.totalResults)
         })
 
         builder.addCase(fetchMovies.rejected, (state, { payload }) => {
-            if (payload) state.error = payload.message
+            // if (payload) state.error = payload.message
             // TODO: display error somehow
             state.status = 'idle'
         })
@@ -87,5 +107,7 @@ export const movieResultsSlice = createSlice({
 // Create and export the selector:
 export const selectMovies = (state: RootState) => state.movies.movies
 export const selectStatus = (state: RootState) => state.movies.status
+export const selectPageNumber = (state: RootState) => state.movies.pageNumber
+export const selectCount = (state: RootState) => state.movies.totalResults
 
 export default movieResultsSlice.reducer

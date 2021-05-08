@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useDebounce } from '../../app/hooks'
 import { useTypedSelector } from '../../app/store'
@@ -6,11 +6,13 @@ import { fetchMovies, selectStatus } from '../../features/movie-results/movieRes
 
 function SearchBar() {
     const dispatch = useDispatch()
+    // const dispatch = useAppDispatch()
     const [input, setInput] = useState('')
     const debouncedSearchTerm: string = useDebounce<string>(input, 500);
     const status = useTypedSelector(selectStatus)
 
     // const [isSearching, setIsSearching] = useState<boolean>(false);
+
 
     // Effect for API call
     useEffect(

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+// import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
     addNomination,
     removeNomination,
@@ -10,9 +10,12 @@ import {
 import styles from './Nominations.module.css';
 import { Movie } from '../movie/movie';
 import { useTypedSelector } from '../../app/store';
+import { useDispatch } from 'react-redux';
+import NominationCard from '../../components/nomination-card/NominationCard';
 
 export function Nominations() {
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
+    const dispatch = useDispatch()
     const movies = useTypedSelector(selectNoms)
 
     return (
@@ -22,7 +25,8 @@ export function Nominations() {
                 Nominations
             </h3>
             <ul className='movie-list'>
-                {movies.map((movie: Movie) => <li key={movie.imdbID} className='movie'>{movie.Title}</li>)}
+                {movies.map((movie: Movie) => <li key={movie.imdbID}
+                    className='movie'><NominationCard {...movie} /></li>)}
             </ul>
 
         </section>

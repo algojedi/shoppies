@@ -5,13 +5,9 @@ export interface Movie {
     Type: string
     Poster: string
 }
-export interface MovieResultsResponse {
+export interface MovieResultsFetchResponse {
     Search: Movie[]
     totalResults: string
     Response: string
+    pageNumber: number
 }
-
-// export interface MovieResultError {
-//     Response: boolean
-
-// }

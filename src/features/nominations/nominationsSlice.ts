@@ -25,7 +25,11 @@ const addNominationReducer = (
 ) => {
     const { payload } = action
     console.log('adding nomination')
-    state.nominations.push(payload)
+    const index = state.nominations.findIndex(
+        (movie: Movie) => movie.imdbID === payload.imdbID
+    )
+    // do not add movie already nominated
+    if (index < 0) state.nominations.push(payload)
 }
 
 const removeNominationReducer = (

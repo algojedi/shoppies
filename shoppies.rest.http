@@ -1,4 +1,4 @@
-GET http://www.omdbapi.com/?apikey=ca4f8507&s=becom&type=movie&page=1 HTTP/1.1
+GET http://www.omdbapi.com/?apikey=ca4f8507&s=amadeus&type=movie&page=2 HTTP/1.1
 Content-Type: application/json
 
 ###
