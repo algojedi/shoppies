@@ -1,9 +1,18 @@
+$breakpoint-tablet: 700px;
+
 .navbar {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem;
     align-items: center;
-    position: fixed;
+    align-content: center;
+    // justify-items: center;
     height: var(--navbar-height);
+    position: fixed;
+    padding: 2rem;
     width: 100%;
     background: var(--primary); /* older browsers */
     background: -moz-linear-gradient(
@@ -22,16 +31,20 @@
         var(--primary-light) 100%
     ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
+    @media (max-width: $breakpoint-tablet) {
+        grid-template-columns: 1fr;
+        justify-content: center;
+        --navbar-height: 14rem;
+    }
     &_title {
         color: var(--white);
         font-size: 2rem;
         font-family: 'Prata', serif;
-        margin: 3rem;
     }
     &_input {
         padding: 0.5rem 1rem;
         border: 0.25rem solid var(--primary);
-        width: 50%;
+        max-width: 400px;
         border-radius: var(--border-radius);
         outline: none;
         transition: all 0.25s ease-in-out;
@@ -42,8 +55,12 @@
         &:focus {
             box-shadow: 0 0 0 2px white, 0 0 0 5px var(--color-primary);
         }
-    }
-    &_status-indicator {
+        &_status-indicator {
+            display: none;
+        }
+        @media (max-width: $breakpoint-tablet) {
+            max-width: 100%;
+        }
     }
 }
 .list {
@@ -64,9 +81,7 @@
 }
 
 .movie-card {
-    // border: 0.5px solid var(--primary);
-    // border-radius: var(--border-radius);
-    // margin: 2rem;
+    box-shadow: 1px 1px 1px 1px darkgrey;
     outline: 2px dashed black;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -101,6 +116,12 @@
             margin-top: auto;
             &:hover {
                 background-color: var(--secondary);
+            }
+            &:disabled,
+            &[disabled] {
+                border: 1px solid #999999;
+                background-color: var(--black-light);
+                color: var(--black-dark);
             }
         }
     }

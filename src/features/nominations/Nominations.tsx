@@ -12,6 +12,7 @@ import { Movie } from '../movie/movie';
 import { useTypedSelector } from '../../app/store';
 import { useDispatch } from 'react-redux';
 import NominationCard from '../../components/nomination-card/NominationCard';
+import './nominations.scss'
 
 export function Nominations() {
     // const dispatch = useAppDispatch();
