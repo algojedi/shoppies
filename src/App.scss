@@ -81,8 +81,8 @@ $breakpoint-tablet: 700px;
 }
 
 .movie-card {
-    box-shadow: 1px 1px 1px 1px darkgrey;
-    outline: 2px dashed black;
+    -webkit-box-shadow: 1px 1px 2px 1px rgba(255, 255, 255, 0.15);
+    box-shadow: 1px 1px 2px 1px rgba(255, 255, 255, 0.15);
     display: grid;
     grid-template-columns: 1fr 1fr;
 
@@ -114,14 +114,17 @@ $breakpoint-tablet: 700px;
             border-radius: var(--border-radius-small);
             background-color: var(--black-light);
             margin-top: auto;
+            transition: all 0.25s ease-in-out;
             &:hover {
-                background-color: var(--secondary);
+                background-color: var(--primary);
+                color: var(--white);
             }
             &:disabled,
             &[disabled] {
                 border: 1px solid #999999;
                 background-color: var(--black-light);
-                color: var(--black-dark);
+                color: #999999;
+                cursor: default;
             }
         }
     }
