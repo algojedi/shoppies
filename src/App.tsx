@@ -64,11 +64,10 @@ function App() {
             </section>
             <Nominations />
             <section className='search-results'>
-                <h3 className='search-results_title'> Search Results </h3>
-                <ul className='search-results_movie-list'>
+                {/* <h3 className='search-results_title'> Search Results </h3> */}
+                <ul className='search-results_movie-list list'>
                     {movies.map((movie: Movie, index) => {
                         if (movies.length === index + 1) {
-                            console.log('attached ref')
                             return (<li ref={lastElementRef} key={movie.imdbID} className='movie'>
                                 <MovieCard {...movie} />
                             </li>)

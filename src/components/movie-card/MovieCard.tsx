@@ -16,19 +16,20 @@ const MovieCard = (movie: Movie) => {
 
     return (
         <section className='movie-card'>
-            <section className="movie-card_img-container">
-                <img alt='no photo available' className='movie-card_img-container_img' src={Poster} />
-            </section>
+            <img alt='no photo available' className='movie-card_img' src={Poster} />
             <section className="movie-card_details">
-                <h3 className='movie-card_details_title'>
-                    {Title}
-                </h3>
-                <h4 className='movie-card_details_year'>
-                    {Year}
-                </h4>
-
+                <section className="movie-card_details_info">
+                    <h3 className='movie-card_details_info_title'>
+                        {Title}
+                    </h3>
+                    <h4 className='movie-card_details_info_year'>
+                        {Year}
+                    </h4>
+                </section>
+                <button disabled={isNominated}
+                    className='movie-card_details_nominate-btn'
+                    onClick={() => dispatch(addNomination(movie))}>Nominate </button>
             </section>
-            <button disabled={isNominated} onClick={() => dispatch(addNomination(movie))}>Nominate </button>
         </section>
     )
 }

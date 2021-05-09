@@ -1,0 +1,13 @@
+.nominations {
+    margin-top: var(--navbar-height);
+    outline: 2px solid red;
+    &_title {
+        font-size: 2rem;
+        color: var(--tertiary);
+        margin: 2rem;
+    }
+    &_movie-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

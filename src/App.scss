@@ -1,6 +1,9 @@
 .navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: fixed;
-    height: 5rem;
+    height: var(--navbar-height);
     width: 100%;
     background: var(--primary); /* older browsers */
     background: -moz-linear-gradient(
@@ -22,41 +25,83 @@
     &_title {
         color: var(--white);
         font-size: 2rem;
+        font-family: 'Prata', serif;
+        margin: 3rem;
     }
     &_input {
+        padding: 0.5rem 1rem;
+        border: 0.25rem solid var(--primary);
+        width: 50%;
+        border-radius: var(--border-radius);
+        outline: none;
+        transition: all 0.25s ease-in-out;
+        &:hover {
+            background: rgb(245, 243, 243);
+            border-color: var(--primary);
+        }
+        &:focus {
+            box-shadow: 0 0 0 2px white, 0 0 0 5px var(--color-primary);
+        }
     }
     &_status-indicator {
     }
 }
+.list {
+    text-decoration: none;
+    list-style: none;
+    padding: 3rem;
+}
 
 .search-results {
-    &_title {
-    }
+    outline: 2px solid purple;
+    // &_title {
+    // }
     &_movie-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+        gap: 2rem;
     }
 }
 
 .movie-card {
-    &_img-container {
-        height: 4rem;
-        width: 2rem;
+    // border: 0.5px solid var(--primary);
+    // border-radius: var(--border-radius);
+    // margin: 2rem;
+    outline: 2px dashed black;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
-        &_img {
-            max-width: 100%;
-        }
+    &_img {
+        max-width: 100%;
     }
     &_details {
-        &_title {
+        background-color: var(--black);
+        color: var(--white);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.5rem;
+        &_info {
+            &_title {
+                font-size: 1rem;
+            }
+            &_year {
+                color: lightgrey;
+                font-weight: bold;
+                font-style: italic;
+                font-size: 0.8rem;
+            }
         }
-        &_year {
-        }
-    }
-    &_nominate-btn {
-        border: 1px solid var(--primary);
-        color: var(--primary);
-        border-radius: 1rem;
-        &:hover {
-            background-color: black;
+        &_nominate-btn {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+            border-radius: var(--border-radius-small);
+            background-color: var(--black-light);
+            margin-top: auto;
+            &:hover {
+                background-color: var(--secondary);
+            }
         }
     }
 }

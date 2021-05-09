@@ -21,10 +21,10 @@ export function Nominations() {
     return (
         <section className='nominations'>
 
-            <h3 className='subheading'>
+            <h3 className='nominations_title'>
                 Nominations
             </h3>
-            <ul className='movie-list'>
+            <ul className='nominations_movie-list list'>
                 {movies.map((movie: Movie) => <li key={movie.imdbID}
                     className='movie'><NominationCard {...movie} /></li>)}
             </ul>
