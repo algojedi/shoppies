@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useDebounce } from '../../app/hooks'
 import { useTypedSelector } from '../../app/store'
-import { fetchMovies, selectCount, selectMovies, selectPageNumber, selectStatus, selectTotalPages } from '../../features/movie-results/movieResultsSlice'
-import { Movie, resultsPerPage } from '../../features/movie/movie'
+import { fetchMovies, selectMovies, selectPageNumber, selectStatus, selectTotalPages } from '../../features/movie-results/movieResultsSlice'
+import { Movie } from '../../features/movie/movie'
+import { Nominations } from '../../features/nominations/Nominations'
 import MovieCard from '../movie-card/MovieCard'
+import './search-bar.scss'
 
-function SearchBar() {
+function Main() {
     const dispatch = useDispatch()
-    // const dispatch = useAppDispatch()
     const [input, setInput] = useState('')
     const debouncedSearchTerm: string = useDebounce<string>(input, 500);
     const status = useTypedSelector(selectStatus)
@@ -17,15 +18,6 @@ function SearchBar() {
     const observer = useRef<HTMLDivElement | IntersectionObserver | null>(null)
     const totalPages = useTypedSelector(selectTotalPages)
     const currentPage = useTypedSelector(selectPageNumber)
-
-
-    // useEffect(() => {
-    //     console.log('inside useEffect')
-    //     console.table({ currentPage, totalPages })
-    //     if (currentPage === totalPages) setHasMore(false)
-    //     else setHasMore(true)
-    // }, [currentPage])
-
     const lastElementRef = useCallback((node) => {
         if (status === 'loading') return
         console.table({ totalPages, currentPage })
@@ -43,14 +35,10 @@ function SearchBar() {
                 console.log('intersection!')
             }
             else console.log('no intersection')
-            // console.log({ entry: entries[0] })
         })
         if (node) {
             observer.current.observe(node)
         }
-        console.log({ node })
-
-        // }, [status, hasMore])
     }, [currentPage, status])
 
 
@@ -71,12 +59,14 @@ function SearchBar() {
     return (
         <>
             <section className="form-input-container">
+                <h1 className="title">The Shoppies</h1>
                 <input className='text-field' type='text' value={input}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)} />
                 {/* <input className='text-field' type='text' value={input} onChange={handleFetch} /> */}
                 <button className='form-btn' type='submit'>Submit</button>
                 <section className='status-indicator'>{status}</section>
             </section>
+            <Nominations />
             <section className='search-results-section'>
 
                 <h3 className='subheading'>
@@ -101,4 +91,4 @@ function SearchBar() {
     )
 }
 
-export default SearchBar
+export default Main
