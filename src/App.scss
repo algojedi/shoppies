@@ -1,0 +1,62 @@
+.navbar {
+    position: fixed;
+    height: 5rem;
+    width: 100%;
+    background: var(--primary); /* older browsers */
+    background: -moz-linear-gradient(
+        top,
+        var(--primary) 0%,
+        var(--primary-light) 100%
+    ); /* FF3.6-15 */
+    background: -webkit-linear-gradient(
+        top,
+        var(--primary) 0%,
+        var(--primary-light) 100%
+    ); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+        to bottom,
+        var(--primary) 0%,
+        var(--primary-light) 100%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+    &_title {
+        color: var(--white);
+        font-size: 2rem;
+    }
+    &_input {
+    }
+    &_status-indicator {
+    }
+}
+
+.search-results {
+    &_title {
+    }
+    &_movie-list {
+    }
+}
+
+.movie-card {
+    &_img-container {
+        height: 4rem;
+        width: 2rem;
+
+        &_img {
+            max-width: 100%;
+        }
+    }
+    &_details {
+        &_title {
+        }
+        &_year {
+        }
+    }
+    &_nominate-btn {
+        border: 1px solid var(--primary);
+        color: var(--primary);
+        border-radius: 1rem;
+        &:hover {
+            background-color: black;
+        }
+    }
+}
