@@ -55,7 +55,7 @@ export const fetchMovies = createAsyncThunk<
     // async (userData: UserData) => {
     if (userData.selection == '') return emptyResponse
     const formattedSelection = formatSelection(userData.selection)
-    let url = `http://www.omdbapi.com/?apikey=ca4f8507&type=movie&s=${formattedSelection}`
+    let url = `https://www.omdbapi.com/?apikey=ca4f8507&type=movie&s=${formattedSelection}`
     const pageNumUrl = `&page=${userData.page}`
     const response = await fetch(url + pageNumUrl)
     // console.log({ url: url + pageNumUrl })

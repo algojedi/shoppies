@@ -17,7 +17,7 @@ export const store = configureStore({
         movies: moviesReducer
     },
     middleware,
-    devTools: !inProduction
+    devTools: false //!inProduction
 })
 
 // export type AppDispatch = typeof store.dispatch
