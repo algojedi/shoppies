@@ -4,7 +4,7 @@ import { useDebounce } from './app/hooks'
 import { useTypedSelector } from './app/store'
 import { fetchMovies, selectMovies, selectPageNumber, selectStatus, selectTotalPages } from './features/movie-results/movieResultsSlice'
 import { Movie } from './features/movie/movie'
-import { Nominations } from './features/nominations/Nominations'
+import { Nominations } from './components/nominations/Nominations'
 import MovieCard from './components/movie-card/MovieCard'
 import './App.scss'
 
@@ -19,21 +19,14 @@ function App() {
     const currentPage = useTypedSelector(selectPageNumber)
     const lastElementRef = useCallback((node) => {
         if (status === 'loading') return
-        console.table({ totalPages, currentPage })
-        // if (observer.current) observer.current.disconnect()
         if (observer.current) {
             (observer.current as IntersectionObserver).disconnect()
         }
         observer.current = new IntersectionObserver(entries => {
-            const check = currentPage != totalPages
+            const check = currentPage !== totalPages
             if (entries[0].isIntersecting && check) {
-                console.log('should fetch more movies')
                 dispatch(fetchMovies({ selection: input, page: currentPage + 1 }))
             }
-            if (entries[0].isIntersecting) {
-                console.log('intersection!')
-            }
-            else console.log('no intersection')
         })
         if (node) {
             observer.current.observe(node)

@@ -1,16 +1,14 @@
 import { Movie } from '../../features/movie/movie'
-import { addNomination, removeNomination } from '../../features/nominations/nominationsSlice'
+import { removeNomination } from '../../features/nominations/nominationsSlice'
 import { useDispatch } from 'react-redux';
-// import { FaRegWindowClose } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import './nominationCard.scss'
 
-// const MovieCard = ({ Title, Year, Poster, imdbID }: Movie) => {
 const NominationCard = (movie: Movie) => {
     const dispatch = useDispatch()
-    const { Title, Year, Poster, imdbID } = movie
+    const { Title, Year, imdbID } = movie
     return (
-        <section className='nomination-card'>
+        <section className='nomination-card card'>
             <section className="nomination-card_info">
                 <span className='nomination-card_info_title'>
                     {Title}
@@ -20,7 +18,7 @@ const NominationCard = (movie: Movie) => {
                 </span>
             </section>
             {/* <img src={Poster} /> */}
-            <div className='nomination-card_remove-btn' onClick={() => dispatch(removeNomination({ id: movie.imdbID }))}>
+            <div className='nomination-card_remove-btn' onClick={() => dispatch(removeNomination({ id: imdbID }))}>
                 <MdClose className='nomination-card_remove-btn_icon' />
             </div>
         </section>

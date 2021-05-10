@@ -5,12 +5,12 @@ import {
     getDefaultMiddleware
 } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useSelector } from 'react-redux'
-import { logger } from 'redux-logger'
+// import { logger } from 'redux-logger'
 import nominationsReducer from '../features/nominations/nominationsSlice'
 import moviesReducer from '../features/movie-results/movieResultsSlice'
 
-const inProduction = process.env.NODE_ENV === 'production'
-const middleware = [...getDefaultMiddleware(), logger]
+// const inProduction = process.env.NODE_ENV === 'production'
+const middleware = [...getDefaultMiddleware()]
 export const store = configureStore({
     reducer: {
         nominations: nominationsReducer,

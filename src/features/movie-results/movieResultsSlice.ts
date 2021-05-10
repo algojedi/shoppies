@@ -1,10 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState, AppThunk } from '../../app/store'
-import {
-    MovieResultsFetchResponse,
-    Movie,
-    resultsPerPage
-} from '../movie/movie'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { RootState } from '../../app/store'
+import { Movie } from '../movie/movie'
 export interface MovieResultsState {
     status: 'loading' | 'idle'
     error: string | null
@@ -12,6 +8,8 @@ export interface MovieResultsState {
     totalResults: number
     pageNumber: number
 }
+
+export const resultsPerPage = 10
 
 const initialState: MovieResultsState = {
     status: 'idle',
@@ -21,16 +19,24 @@ const initialState: MovieResultsState = {
     pageNumber: 0
 }
 
+interface MovieResultsFetchResponse {
+    Search: Movie[]
+    totalResults: string
+    Response: string
+    pageNumber: number
+}
+
+export interface UserData {
+    page: number
+    selection: string
+}
+
 // This type describes the error object structure:
 type FetchMoviesError = {
     message: string
 }
 function getUniqueList(arr: Movie[]): Movie[] {
     return [...new Map(arr.map((item) => [item.imdbID, item])).values()]
-}
-export interface UserData {
-    page: number
-    selection: string
 }
 
 const emptyResponse: MovieResultsFetchResponse = {
@@ -50,30 +56,23 @@ export const fetchMovies = createAsyncThunk<
     UserData,
     { rejectValue: FetchMoviesError }
 >('movies/fetch', async (userData, thunkApi) => {
-    // >
-    // 'movies/fetch',
-    // async (userData: UserData) => {
-    if (userData.selection == '') return emptyResponse
+    if (userData.selection === '') return emptyResponse
     const formattedSelection = formatSelection(userData.selection)
     let url = `https://www.omdbapi.com/?apikey=ca4f8507&type=movie&s=${formattedSelection}`
     const pageNumUrl = `&page=${userData.page}`
     const response = await fetch(url + pageNumUrl)
-    // console.log({ url: url + pageNumUrl })
     if (response.status !== 200) {
         // Return the error message for server error
-        console.log('error message when fetching')
         return thunkApi.rejectWithValue({
             message: 'Failed to fetch movies.'
-        }) // as FetchMoviesError
+        })
     }
     const data: MovieResultsFetchResponse = await response.json()
-    console.log({ data })
     const { Response, totalResults, Search } = data
-    if (Response == 'False') return emptyResponse
+    if (Response === 'False') return emptyResponse
 
     // api returns duplicates in some search results
     const uniqueList = getUniqueList(Search) // Search property contains the list of movies
-    // const count = Number.parseInt(totalResults)
     return {
         Search: uniqueList,
         Response,
@@ -93,8 +92,6 @@ export const movieResultsSlice = createSlice({
         })
 
         builder.addCase(fetchMovies.fulfilled, (state, { payload }) => {
-            // state.movies = [...payload]
-            // state.movies = payload.state.status = 'idle'
             if (payload.pageNumber > 1) {
                 state.movies = getUniqueList([
                     ...state.movies,
@@ -109,8 +106,7 @@ export const movieResultsSlice = createSlice({
         })
 
         builder.addCase(fetchMovies.rejected, (state, { payload }) => {
-            // if (payload) state.error = payload.message
-            // TODO: display error somehow
+            // TODO: display error
             state.status = 'idle'
         })
     }

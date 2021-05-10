@@ -1,4 +1,3 @@
-import React from 'react'
 import { Movie } from '../../features/movie/movie'
 import { addNomination, selectNoms } from '../../features/nominations/nominationsSlice'
 import { useDispatch } from 'react-redux';
@@ -36,7 +35,7 @@ const MovieCard = (movie: Movie) => {
         dispatch(addNomination(movie))
     }
     return (
-        <section className='movie-card'>
+        <section className='movie-card card'>
             <img alt='NO PHOTO AVAILABLE' className='movie-card_img' src={Poster} />
             <section className="movie-card_details">
                 <section className="movie-card_details_info">

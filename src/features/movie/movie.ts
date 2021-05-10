@@ -5,11 +5,3 @@ export interface Movie {
     Type: string
     Poster: string
 }
-export interface MovieResultsFetchResponse {
-    Search: Movie[]
-    totalResults: string
-    Response: string
-    pageNumber: number
-}
-
-export const resultsPerPage = 10

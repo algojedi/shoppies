@@ -1,22 +1,12 @@
-
-import React, { useState } from 'react';
-
-// import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
-    addNomination,
-    removeNomination,
     selectNoms
-} from './nominationsSlice';
-import styles from './Nominations.module.css';
-import { Movie } from '../movie/movie';
+} from '../../features/nominations/nominationsSlice';
+import { Movie } from '../../features/movie/movie';
 import { useTypedSelector } from '../../app/store';
-import { useDispatch } from 'react-redux';
-import NominationCard from '../../components/nomination-card/NominationCard';
+import NominationCard from '../nomination-card/NominationCard';
 import './nominations.scss'
 
 export function Nominations() {
-    // const dispatch = useAppDispatch();
-    const dispatch = useDispatch()
     const movies = useTypedSelector(selectNoms)
 
     return (
