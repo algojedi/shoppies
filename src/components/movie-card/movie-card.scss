@@ -1,0 +1,62 @@
+.movie-card {
+    -webkit-box-shadow: 1px 1px 2px 1px rgba(255, 255, 255, 0.15);
+    box-shadow: 1px 1px 2px 1px rgba(255, 255, 255, 0.15);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0.25rem;
+
+    &_img {
+        max-width: 100%;
+        // &[src*='N/A'] {
+        //     outline: 2px solid goldenrod;
+        //     content: url('');
+        // }
+    }
+    &_details {
+        background-color: var(--black);
+        color: var(--white);
+        display: flex;
+        min-height: 170px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.5rem;
+        &_info {
+            &_title {
+                font-size: 1rem;
+            }
+            &_year {
+                color: lightgrey;
+                font-weight: bold;
+                font-style: italic;
+                font-size: 0.8rem;
+            }
+        }
+        &_nominate-btn {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+            border-radius: var(--border-radius-small);
+            background-color: var(--black-light);
+            margin-top: auto;
+            transition: all 0.25s ease-in-out;
+            &:hover {
+                background-color: var(--primary);
+                color: var(--white);
+            }
+            &:disabled,
+            &[disabled] {
+                border: 1px solid #999999;
+                background-color: var(--black-light);
+                color: #999999;
+                cursor: default;
+            }
+        }
+    }
+}
+
+.error-toast {
+    font-size: 1rem;
+}
+.Toastify__toast--error {
+    background: var(--darkred) !important;
+}

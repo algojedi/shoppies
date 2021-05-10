@@ -1,0 +1,35 @@
+.nomination-card {
+    background-color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: var(--border-radius-small);
+    color: var(--white);
+    display: flex;
+    margin: 0.25rem;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem;
+
+    &_info {
+        display: flex;
+        font-size: 0.8rem;
+        &_title {
+            margin-right: 0.5rem;
+        }
+        &_year {
+            font-style: italic;
+        }
+    }
+    &_remove-btn {
+        cursor: pointer;
+        margin-left: 1rem;
+        &_icon {
+            color: var(--darkred);
+            font-size: 1rem;
+            transition: all 0.25s ease-in-out;
+            &:hover {
+                fill: red;
+            }
+        }
+    }
+}

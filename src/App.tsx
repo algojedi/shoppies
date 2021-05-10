@@ -60,11 +60,10 @@ function App() {
                 <h1 className='navbar_title'>The Shoppies</h1>
                 <input className='navbar_input' type='text' value={input} placeholder='Search movie...'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)} />
-                <section className='navbar_status-indicator'>{status}</section>
+                {/* <section className='navbar_status-indicator'>{status}</section> */}
             </section>
             <Nominations />
             <section className='search-results'>
-                {/* <h3 className='search-results_title'> Search Results </h3> */}
                 <ul className='search-results_movie-list list'>
                     {movies.map((movie: Movie, index) => {
                         if (movies.length === index + 1) {

@@ -8,15 +8,6 @@ export interface NominationsState {
 
 const initialState: NominationsState = {
     nominations: []
-    // {
-    //     Title: 'A Million Ways to Die in the West',
-    //     Year: '2014',
-    //     imdbID: 'tt2557490',
-    //     Type: 'movie',
-    //     Poster:
-    //         'https://m.media-amazon.com/images/M/MV5BMTQ0NDcyNjg0MV5BMl5BanBnXkFtZTgwMzk4NTA4MTE@._V1_SX300.jpg'
-    // }
-    // ]
 }
 
 const addNominationReducer = (
@@ -24,7 +15,7 @@ const addNominationReducer = (
     action: PayloadAction<Movie>
 ) => {
     const { payload } = action
-    console.log('adding nomination')
+    if (state.nominations.length === 5) return
     const index = state.nominations.findIndex(
         (movie: Movie) => movie.imdbID === payload.imdbID
     )
