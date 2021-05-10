@@ -30,12 +30,17 @@ $breakpoint-tablet: 700px;
     @media (max-width: $breakpoint-tablet) {
         grid-template-columns: 1fr;
         justify-content: center;
-        --navbar-height: 14rem;
+        padding: 0px 2rem;
+        // --navbar-height: 12rem;
     }
     &_title {
         color: var(--white);
         font-size: 2rem;
         font-family: 'Prata', serif;
+
+        @media (max-width: $breakpoint-tablet) {
+            font-size: 1.6rem;
+        }
     }
     &_input {
         padding: 0.5rem 1rem;

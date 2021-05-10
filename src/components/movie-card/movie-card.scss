@@ -31,11 +31,12 @@
             }
         }
         &_nominate-btn {
+            background-color: var(--black-light);
             border: 1px solid var(--primary);
+            border-radius: var(--border-radius-small);
             color: var(--primary);
             cursor: pointer;
-            border-radius: var(--border-radius-small);
-            background-color: var(--black-light);
+            font-weight: bold;
             padding: 0.2rem 0.25rem;
             transition: all 0.25s ease-in-out;
             &:hover {
