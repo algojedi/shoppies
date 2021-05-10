@@ -30,7 +30,7 @@ $breakpoint-tablet: 700px;
     @media (max-width: $breakpoint-tablet) {
         grid-template-columns: 1fr;
         justify-content: center;
-        padding: 0px 2rem;
+        padding: 0px 1.6rem;
         // --navbar-height: 12rem;
     }
     &_title {

@@ -22,7 +22,7 @@
 
     --border-radius: 1rem;
     --border-radius-small: 0.25rem;
-    --navbar-height: 10rem;
+    --navbar-height: 8rem;
 }
 
 body {
@@ -33,4 +33,13 @@ body {
     height: 100%;
 
     font-family: 'Open Sans', sans-serif;
+}
+
+/* styling for toasts */
+.error-toast,
+.success-toast {
+    font-size: 1rem;
+}
+.Toastify__toast--error {
+    background: var(--darkred) !important;
 }

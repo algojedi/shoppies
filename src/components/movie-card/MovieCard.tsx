@@ -23,7 +23,7 @@ const MovieCard = (movie: Movie) => {
             toast.error('Limit of five nominations', {
                 className: "error-toast",
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: false,
@@ -33,6 +33,10 @@ const MovieCard = (movie: Movie) => {
             return
         }
         dispatch(addNomination(movie))
+        toast.success('Movie nominated!', {
+            className: 'success-toast',
+            autoClose: 3000
+        })
     }
     return (
         <section className='movie-card card'>
