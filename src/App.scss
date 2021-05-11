@@ -36,7 +36,7 @@ $breakpoint-tablet: 700px;
     &_title {
         color: var(--white);
         font-size: 2rem;
-        font-family: 'Prata', serif;
+        font-family: 'Oswald', Arial, Helvetica, sans-serif;
 
         @media (max-width: $breakpoint-tablet) {
             font-size: 1.6rem;
