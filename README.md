@@ -1,16 +1,19 @@
 # The Shoppies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.  It allows user to search through a movie databse and nominate favorites 🏆
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.  The site allows a user to search through a movie database and nominate favorites 🏆  Made as a submission to the shopify frontend UI/UX challenge 2021 ⭐  The site is a work in progress and I will continue to tweak it now and then.
 
-**Deployed using [GitHub Pages](https://algojedi.github.io/shoppies)
+**Deployed using [GitHub Pages](https://algojedi.github.io/shoppies)**
 
+![image](https://user-images.githubusercontent.com/48499132/117857767-22c47300-b25b-11eb-899e-2a50471edbd5.png)
 
+## Tech/framework used
+- Developed by using, for the first time, **Redux Toolkit**
+- **Typescript**
+- **React**
+- OMDb API
+- SCSS
 
-![image](https://user-images.githubusercontent.com/48499132/117856549-c0b73e00-b259-11eb-81c3-55a4d3e8998f.png)
-
-
-
-
+includes pagination! 😍
 
 ## Available Scripts
 
