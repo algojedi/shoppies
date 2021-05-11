@@ -1,4 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# The Shoppies
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.  It allows user to search through a movie databse and nominate favorites 🏆
+
+**Deployed using [GitHub Pages](https://algojedi.github.io/shoppies)
+
+
+
+![image](https://user-images.githubusercontent.com/48499132/117856549-c0b73e00-b259-11eb-81c3-55a4d3e8998f.png)
+
+
+
+
 
 ## Available Scripts
 
