@@ -7,6 +7,7 @@ import { Movie } from './features/movie/movie'
 import { Nominations } from './components/nominations/Nominations'
 import MovieCard from './components/movie-card/MovieCard'
 import './App.scss'
+import { BeatLoader } from 'react-spinners'
 
 function App() {
     const dispatch = useDispatch()
@@ -45,7 +46,8 @@ function App() {
             }
         },
         [debouncedSearchTerm] // Only call effect if debounced search term changes
-    );
+    )
+    console.log(status === 'loading')
 
     return (
         <>
@@ -53,9 +55,11 @@ function App() {
                 <h1 className='navbar_title'>The Shoppies</h1>
                 <input className='navbar_input' type='text' value={input} placeholder='Search movie...'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)} />
-                {/* <section className='navbar_status-indicator'>{status}</section> */}
             </section>
             <Nominations />
+            <section className='navbar_status-indicator'>
+                <BeatLoader loading={status === 'loading'} />
+            </section>
             <section className='search-results'>
                 <ul className='search-results_movie-list list'>
                     {movies.map((movie: Movie, index) => {

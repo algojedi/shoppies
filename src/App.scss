@@ -42,6 +42,11 @@ $breakpoint-tablet: 700px;
             font-size: 1.6rem;
         }
     }
+    &_status-indicator {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
     &_input {
         padding: 0.5rem 1rem;
         border: 0.25rem solid var(--primary);
@@ -55,9 +60,6 @@ $breakpoint-tablet: 700px;
         }
         &:focus {
             box-shadow: 0 0 0 2px white, 0 0 0 5px var(--primary);
-        }
-        &_status-indicator {
-            display: none;
         }
         @media (max-width: $breakpoint-tablet) {
             max-width: 100%;
